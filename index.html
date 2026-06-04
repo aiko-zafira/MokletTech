@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MokletTech — Solusi Digital Untuk Indonesia</title>
+
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+   
+    :root {
+      --cyan:     #00E5FF;
+      --magenta:  #FF2D78;
+      --yellow:   #FFE500;
+      --dark:     #0A0A14;
+      --card-bg:  #12121F;
+      --border:   rgba(0, 229, 255, 0.18);
+      --text:     #E8E8F0;
+      --muted:    #8888AA;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --radius:   14px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,229,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(255,45,120,0.07) 0%, transparent 60%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 20, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+
+      /* Mobile: flex kolom — logo atas, nav bawah */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 20px;
+    }
+
+    
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo span {
+      color: var(--magenta);
+    }
+
+    .logo::before {
+      content: "◈";
+      font-size: 1.1rem;
+    }
+
+    
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+    }
+
+    nav a {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: color var(--transition), border-color var(--transition), background var(--transition);
+      letter-spacing: 0.3px;
+    }
+
+    nav a:hover {
+      color: var(--cyan);
+      border-color: var(--border);
+      background: rgba(0,229,255,0.06);
+    }
+
+   
+    @media (min-width: 768px) {
+      header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 40px;
+        gap: 0;
+      }
+
+      nav {
+        flex-direction: row;
+        width: auto;
+        gap: 4px;
+      }
+
+      nav a {
+        padding: 8px 16px;
+      }
+    }
+
+    .hero {
+      text-align: center;
+      padding: 72px 20px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--magenta);
+      border: 1px solid rgba(255,45,120,0.35);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 7vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .hero h1 .accent-cyan    { color: var(--cyan); }
+    .hero h1 .accent-magenta { color: var(--magenta); }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 440px;
+      margin: 0 auto 32px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--cyan), var(--magenta));
+      color: var(--dark);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 32px;
+      border-radius: 99px;
+      letter-spacing: 0.5px;
+      animation: fadeUp 0.7s 0.3s ease both;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 0 28px rgba(0,229,255,0.25);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 42px rgba(0,229,255,0.4);
+    }
+
+    
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 40px;
+    }
+
+    .services {
+      padding: 56px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Grid kartu — Mobile: 1 kolom penuh */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    /* Tablet >= 768px: 2 kolom */
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Desktop >= 1024px: 3 kolom */
+    @media (min-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Kartu layanan */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(0,229,255,0.04), transparent 60%);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,229,255,0.45);
+      box-shadow: 0 12px 40px rgba(0,229,255,0.12);
+    }
+
+    /* Ikon emoji setiap kartu */
+    .card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+      display: block;
+      line-height: 1;
+    }
+
+    /* Garis warna dekoratif */
+    .card-line {
+      width: 40px;
+      height: 3px;
+      border-radius: 99px;
+      margin-bottom: 14px;
+    }
+
+    .card:nth-child(1) .card-line { background: var(--cyan); }
+    .card:nth-child(2) .card-line { background: var(--magenta); }
+    .card:nth-child(3) .card-line { background: var(--yellow); }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* Tag badge kartu */
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 99px;
+      margin-top: 18px;
+    }
+
+    .card:nth-child(1) .card-tag { background: rgba(0,229,255,0.12);  color: var(--cyan); }
+    .card:nth-child(2) .card-tag { background: rgba(255,45,120,0.12); color: var(--magenta); }
+    .card:nth-child(3) .card-tag { background: rgba(255,229,0,0.12);  color: var(--yellow); }
+
+    /* ============================================
+       SECTION C — FOOTER
+       Mobile: 1 kolom rata tengah
+       Tablet/Desktop: 2 kolom
+       ============================================ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 20px 28px;
+      margin-top: 32px;
+      background: rgba(8, 8, 16, 0.6);
+    }
+
+    /* Footer inner — Mobile: 1 kolom, teks tengah */
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      text-align: center;
+    }
+
+    /* Tablet/Desktop >= 768px: 2 kolom, teks kiri */
+    @media (min-width: 768px) {
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
+      }
+    }
+
+    /* Kolom kiri: branding */
+    .footer-brand .logo {
+      
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      display: inline-flex;
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Kolom kanan: navigasi footer */
+    .footer-nav h4 {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .footer-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* Desktop: menu rata kiri */
+    @media (min-width: 768px) {
+      .footer-nav ul {
+        align-items: flex-start;
+      }
+    }
+
+    .footer-nav ul li a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+
+    .footer-nav ul li a:hover {
+      color: var(--cyan);
+    }
+
+    /* Copyright */
+    .footer-copy {
+      max-width: 1100px;
+      margin: 32px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-copy span {
+      color: var(--magenta);
+    }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Padding tablet/desktop lebih lega */
+    @media (min-width: 768px) {
+      .services { padding: 72px 40px; }
+      footer     { padding: 64px 40px 32px; }
+    }
+  </style>
+  
+</head>
+<body>
+
+  
+  <header>
+
+    <!-- Logo perusahaan -->
+    <div class="logo">
+      Moklet<span>Tech</span>
+    </div>
+
+    <!-- Menu navigasi utama -->
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Tentang</a>
+      <a href="#">Layanan</a>
+      <a href="#">Kontak</a>
+    </nav>
+
+  </header>
+
+  <!-- ======================================
+       HERO SECTION
+       ====================================== -->
+  <section class="hero">
+    <span class="hero-badge">✦ MokletTech ✦</span>
+    <h1>
+      Solusi Digital<br>
+      <span class="accent-cyan">Untuk</span>
+      <span class="accent-magenta"> Indonesia</span>
+    </h1>
+    <p>Kami membangun produk digital yang berdampak — dari website hingga aplikasi mobile yang memukau.</p>
+    <a href="#" class="hero-cta">Jelajahi Layanan →</a>
+  </section>
+
+  
+  <section class="services">
+
+    <span class="section-label">Apa yang kami lakukan</span>
+    <h2 class="section-title">Layanan Unggulan</h2>
+
+    <!-- CSS Grid: responsif 1 → 2 → 3 kolom -->
+    <div class="services-grid">
+
+      <!-- Kartu 1: Web Development -->
+      <div class="card">
+        <span class="card-icon">🌐</span>
+        <div class="card-line"></div>
+        <h3>Web Development</h3>
+        <p>Kami merancang dan mengembangkan website modern yang cepat, responsif, dan siap bersaing di era digital. Setiap baris kode ditulis dengan standar industri terkini.</p>
+        <span class="card-tag">Frontend · Backend</span>
+      </div>
+
+      <!-- Kartu 2: Mobile App -->
+      <div class="card">
+        <span class="card-icon">📱</span>
+        <div class="card-line"></div>
+        <h3>Mobile App</h3>
+        <p>Aplikasi mobile Android & iOS yang intuitif dan berperforma tinggi untuk menjangkau jutaan pengguna. Dikembangkan dengan teknologi cross-platform terdepan.</p>
+        <span class="card-tag">Android · iOS</span>
+      </div>
+
+      <!-- Kartu 3: UI/UX Design -->
+      <div class="card">
+        <span class="card-icon">🎨</span>
+        <div class="card-line"></div>
+        <h3>UI/UX Design</h3>
+        <p>Desain antarmuka yang cantik sekaligus nyaman digunakan, berdasarkan riset pengguna dan prinsip human-centered design. Dari wireframe hingga prototype interaktif.</p>
+        <span class="card-tag">Figma · Research</span>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <footer>
+
+    <div class="footer-inner">
+
+      <!-- Kolom kiri: branding perusahaan -->
+      <div class="footer-brand">
+        <div class="logo">Moklet<span>Tech</span></div>
+        <p class="footer-tagline">Solusi Digital Untuk Indonesia</p>
+      </div>
+
+      <!-- Kolom kanan: link navigasi -->
+      <div class="footer-nav">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Tentang</a></li>
+          <li><a href="#">Layanan</a></li>
+          <li><a href="#">Kontak</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Copyright bawah -->
+    <div class="footer-copy">
+      <span>©2026</span> MokletTech. All rights reserved. — Made with ♥ &amp; NCT Dream vibes
+    </div>
+
+  </footer>
+
+</body>
+</html>
